@@ -39,30 +39,12 @@ def findkey(lvalue):
         return []
 
 
-def get_songs(plname):
+def get_songs(pid):
     print "get song for PLAYLIST ",
     print plname
     isongs = []
     iartists=[]
-    pids = findkey(plname)
-    if not type(pids) == list:
-        pids = [pids]
- #   print "THERE ARE X playlists with this name where X is",
- #   print len(pids)
-    pids = set(pids)
-    for count, pid in enumerate(pids):
-       # print pid
-#        vs=trackuris.loc[pid].index.values
-        vs = pidtotracks[pid]
-        isongs=np.append(isongs,vs)
-       # print "with num songs",
-       # print len(vs)
-     #   for v in vs:
-      #      isongs.append(v)
-
-        if count > 100 and len(isongs) >= 600:
-            break
-    return isongs, iartists
+    return vs 
 
 from collections import Counter
 def most_sim_pl(name):
@@ -70,13 +52,19 @@ def most_sim_pl(name):
      print name
      songs = []
      artist = []
-     try:
-         mos_sim = model.docvecs.most_similar(name, topn=50)
-     except Exception as e:
-         print str(e)
-         return []
+     pids = findkey(plname)
+     # pids with name
+     pids = set(pids)
+     mos_sims = []
+     for pid in pids:
+         try:
+             mos_sim = model.docvecs.most_similar(pid, topn=50)
+         except Exception as e:
+             print str(e)
+             continue
+         mos_sims= np.append(mos_sim, mos_sims)
      for n in mos_sim:
-         isongs, iartists = get_songs(n[0])
+         isongs = pidtotracks[pid]
          for i in isongs:
              songs.append(i)
      c=Counter(songs)
