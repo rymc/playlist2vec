@@ -36,9 +36,9 @@ class Corpus(object):
                 name.append(pl['name'].lower())
                 doc =[]
                 for t in pl['tracks']:
-                    doc.append(t['track_uri'].lower())
-                    doc.append(t['artist_uri'].lower())
-                    doc.append(t['album_uri'].lower())
+                    doc.append(t['track_uri'])
+                    doc.append(t['artist_uri'])
+                    doc.append(t['album_uri'])
                  #   pid_to_tracks[t['track_name']].append(pl['pid'])
                 yield TaggedDocument(words=doc, tags=name)
 
