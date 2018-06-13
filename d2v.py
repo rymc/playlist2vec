@@ -28,7 +28,6 @@ class Corpus(object):
         for i, j in enumerate(glob.glob("data/*.json")):
             with open(j) as f:
                 data = json.load(f)
-            self.total_examples += 1
 
             for pl in data['playlists']:
                 name = []
@@ -40,6 +39,7 @@ class Corpus(object):
                     doc.append(t['artist_uri'])
                     doc.append(t['album_uri'])
                  #   pid_to_tracks[t['track_name']].append(pl['pid'])
+                self.total_examples += 1
                 yield TaggedDocument(words=doc, tags=name)
 
 
