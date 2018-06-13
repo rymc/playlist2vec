@@ -33,7 +33,7 @@ class Corpus(object):
             for pl in data['playlists']:
                 name = []
 #                name.append("pid_"+str(pl['pid']))
-                name.append(pl['name']))
+                name.append(pl['name'].lower())
                 doc =[]
                 for t in pl['tracks']:
                     doc.append(t['track_uri'].lower())
