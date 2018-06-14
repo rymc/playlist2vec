@@ -51,7 +51,8 @@ def most_sim_pl(name):
          mos_sim = model.docvecs.most_similar(name, topn=50)
      except Exception as e:
          print str(e)
-         return []
+         print "lets infer"
+         mos_sim = model.docvecs.most_similar(model.infer_vector([name], steps=50), topn=50)
      for n in mos_sim:
          isongs, iartists = get_songs(n[0])
          for i in isongs:
