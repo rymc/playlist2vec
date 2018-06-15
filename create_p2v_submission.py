@@ -119,6 +119,7 @@ with open('submission-full.csv', 'w') as f:
             else:
                 uris = build_uris_from_pl(pl)
                 tracks = retrieve_k_most_similar_songs(uris, 600)
+                tracks = [[x] for x in tracks] #because we write ele[0] in write_to_file, tracks needs to be a list of tuples
                 write_to_file(f, pl, tracks)
         except Exception as e:
             print str(e)
