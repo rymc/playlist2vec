@@ -96,12 +96,23 @@ def build_uris_from_pl(pl):
     return uris
 
 
+def retrieve_k_most_similar_songs(uris, k):
+    mos_sim = model.wv.most_similar(uris, topn=(k*4))
+    print mos_sim
+    mos_sim_tracks = []
+    for sim in mos_sim:
+        if sim[0].startswith('spotify:track'):
+            mos_sim_tracks.append(sim[0])
+        if len(mos_sim_tracks) == k:
+            break
+    return mos_sim_tracks
 
 import numpy as np
 with open('submission-full.csv', 'w') as f:
     for plcount, pl in enumerate(data['playlists']):
         try:
-            if len(pl['name']) > 0:
+            if 'name' in pl:
+                continue
                 plname = pl['name'].lower()
                 mostcommon = most_sim_pl(plname)
                 if len(mostcommon) < 600:
@@ -114,13 +125,3 @@ with open('submission-full.csv', 'w') as f:
         except Exception as e:
             print str(e)
 
-def retrieve_k_most_similar_songs(uris, k):
-    mos_sim = model.wv.most_similar(song_uri, topn=(k*4))
-    print mos_sim
-    mos_sim_tracks = []
-    for sim in mos_sim:
-        if sim[0].startswith('spotify:track'):
-            mos_sim_tracks.append(sim[0])
-        if len(mos_sim_tracks) == k:
-            break
-    return mos_sim_tracks
