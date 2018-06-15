@@ -76,7 +76,7 @@ def write_to_file(f, pl, most_similar):
         for t in pl['tracks']:
             seeds.append(t['track_uri'])
         count = 0
-        for ele in mostcommon:
+        for ele in most_similar:
             if count == 500:
                 break
             if ele[0] in seeds:
@@ -98,7 +98,6 @@ def build_uris_from_pl(pl):
 
 def retrieve_k_most_similar_songs(uris, k):
     mos_sim = model.wv.most_similar(uris, topn=(k*4))
-    print mos_sim
     mos_sim_tracks = []
     for sim in mos_sim:
         if sim[0].startswith('spotify:track'):
