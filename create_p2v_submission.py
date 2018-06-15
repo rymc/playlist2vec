@@ -112,7 +112,6 @@ with open('submission-full.csv', 'w') as f:
     for plcount, pl in enumerate(data['playlists']):
         try:
             if 'name' in pl:
-                continue
                 plname = pl['name'].lower()
                 mostcommon = most_sim_pl(plname)
                 if len(mostcommon) < 600:
