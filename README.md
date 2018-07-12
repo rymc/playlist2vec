@@ -1,9 +1,8 @@
 # playlist2vec
 
-You will need a large mapping datafile which can be downloaded from:
-https://seis.bris.ac.uk/~rm17770/pid-trackuri-track.csv.gz
+This is the code we used for the RecSys 2018 Spotify playlist recommendation challenge. 
 
-# to run
+# to run (requires the non-public dataset)
 
 Assuming the data is located in the 'data' directory under the directory containing the code..
 
